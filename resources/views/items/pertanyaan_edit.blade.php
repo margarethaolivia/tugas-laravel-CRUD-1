@@ -8,14 +8,21 @@
 
 @section('content')
 <div class="container col-md-11 pt-4">
-    <h1 class="font-weight-bold pb-4">Tambah Jawaban</h1>
-    <form action="/jawaban/{{ $id }}" method="post">
+    <h1 class="font-weight-bold pb-4">Edit Pertanyaan</h1>
+    @foreach($questions as $question)
+    <form action="/pertanyaan/{{$question->id}}" method="post">
+    @method('put')
     @csrf
         <div class="form-group">
-            <textarea class="form-control" id="isi" name="isi" required></textarea>
+            <label for="judul">Judul</label>
+            <input type="text" class="form-control" id="judul" name="judul" value="{{ $question->judul }}" required>
         </div>
-        <input type="hidden" name="pertanyaan_id" value="{{ $id }}">
+        <div class="form-group">
+            <label for="isi">Isi</label>
+            <textarea class="form-control" id="isi" name="isi" required>{{ $question->isi }}</textarea>
+        </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
+    @endforeach
 </div>
 @endsection

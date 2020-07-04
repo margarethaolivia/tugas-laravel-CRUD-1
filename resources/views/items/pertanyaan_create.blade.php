@@ -13,7 +13,7 @@
     @csrf
         <div class="form-group">
             <label for="judul">Judul</label>
-            <input type="text" class="form-control" id="judul" name="judul" required>
+            <input type="text" class="form-control" id="judul" name="judul" required autofocus>
         </div>
         <div class="form-group">
             <label for="isi">Isi</label>

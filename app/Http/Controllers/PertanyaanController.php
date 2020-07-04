@@ -48,7 +48,9 @@ class PertanyaanController extends Controller
      */
     public function show($id)
     {
-        //
+        $questions = DB::table('questions')->where('id', $id)->get();
+        $answers = DB::table('answers')->where('pertanyaan_id', $id)->get();
+        return view('items.pertanyaan_show', compact('questions'), compact('answers'));
     }
 
     /**
@@ -59,7 +61,8 @@ class PertanyaanController extends Controller
      */
     public function edit($id)
     {
-        //
+        $questions = DB::table('questions')->where('id', $id)->get();
+        return view('items.pertanyaan_edit', compact('questions'));
     }
 
     /**
@@ -71,7 +74,14 @@ class PertanyaanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        DB::table('questions')->where('id', $id)->update([
+                    'judul' => $request->judul,
+                    'isi' => $request->isi
+                    ]);
+
+        $questions = DB::table('questions')->where('id', $id)->get();
+        $answers = DB::table('answers')->where('pertanyaan_id', $id)->get();
+        return view('items.pertanyaan_show', compact('questions'), compact('answers'));
     }
 
     /**
@@ -82,6 +92,8 @@ class PertanyaanController extends Controller
      */
     public function destroy($id)
     {
-        //
+        DB::table('questions')->where('id', $id)->delete();
+        DB::table('answers')->where('pertanyaan_id', $id)->delete();
+        return redirect('pertanyaan')->with('status', 'Pertanyaan berhasil dihapus!');
     }
 }

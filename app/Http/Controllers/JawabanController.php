@@ -25,7 +25,7 @@ class JawabanController extends Controller
      */
     public function create($id)
     {
-        return view('items.jawaban_create', compact('id'));
+        // 
     }
 
     /**
@@ -34,16 +34,13 @@ class JawabanController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
-        $url = explode('/',url()->previous());
-        $id = $url[5];
-        $answer = new Answer;
-        $answer->isi = $request->isi;
-        $answer->pertanyaan_id = $id;
+        Answer::create($request->all());
 
-        $answer->save();
-        return redirect('pertanyaan')->with('status', 'Jawaban berhasil ditambahkan!');
+        $questions = DB::table('questions')->where('id', $request->pertanyaan_id)->get();
+        $answers = DB::table('answers')->where('pertanyaan_id', $request->pertanyaan_id)->get();
+        return view('items.pertanyaan_show', compact('questions'), compact('answers'));
     }
 
     /**

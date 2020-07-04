@@ -16,9 +16,13 @@ route::get('/', 'HomeController@home');
 route::get('/pertanyaan', 'PertanyaanController@index');
 route::get('/pertanyaan/create', 'PertanyaanController@create');
 route::post('/pertanyaan', 'PertanyaanController@store');
-route::get('/jawaban/create/{pertanyaan_id}', 'JawabanController@create');
 route::get('/jawaban/{pertanyaan_id}', 'JawabanController@index');
-route::post('/jawaban/{pertanyaan_id}', 'JawabanController@store');
+route::post('/pertanyaan/{pertanyaan_id}', 'JawabanController@store');
+route::delete('/pertanyaan/{id}', 'PertanyaanController@destroy');
+route::get('/pertanyaan/{id}', 'PertanyaanController@show');
+route::get('/pertanyaan/{id}/edit', 'PertanyaanController@edit');
+route::put('/pertanyaan/{id}', 'PertanyaanController@update');
+
 
 // /pertanyaan/create	GET	PertanyaanController@create	menampilkan form untuk membuat pertanyaan baru
 // /pertanyaan	POST	PertanyaanController@store	menyimpan data baru ke tabel pertanyaan
