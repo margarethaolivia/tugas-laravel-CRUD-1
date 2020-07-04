@@ -21,6 +21,7 @@
             <label for="isi">Isi</label>
             <textarea class="form-control" id="isi" name="isi" required>{{ $question->isi }}</textarea>
         </div>
+        <input type="hidden" name="updated_at" value="{{\Carbon\Carbon::now()}}">
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
     @endforeach

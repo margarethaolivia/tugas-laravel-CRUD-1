@@ -8,15 +8,24 @@
 
 @section('content')
 <div class="container col-md-11 py-4">
-    <h3 class="font-weight-bold pb-2">Daftar Pertanyaan</h3>
+
+    <div class="row">
+        <div class="col">
+            <h3 class="font-weight-bold pb-2 d-inline float-left">Daftar Pertanyaan</h3>
+            <a href="/pertanyaan/create" class="btn btn-info mb-3 float-right">Tambah Pertanyaan</a>
+        </div>
+    </div>
 
     @if (session('status'))
+    <div class="row">
         <div class="alert alert-success">
             {{ session('status') }}
+        </div>
         </div>
     @endif
 
     @if($questions->count() > 0)
+    <div class="row">
     <table class="table">
         <thead class="bg-dark text-white">
             <tr>
@@ -37,10 +46,10 @@
         @endforeach
         </tbody>
     </table>
+    </div>
     @else
         <p class="text-muted font-italic">Belum terdapat pertanyaan</p>
     @endif
     
-    <a href="/pertanyaan/create" class="btn btn-info mb-3">Tambah Pertanyaan</a>
 </div>
 @endsection

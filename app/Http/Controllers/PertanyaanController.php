@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Question;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+Use \Carbon\Carbon;
 
 class PertanyaanController extends Controller
 {
@@ -76,9 +77,9 @@ class PertanyaanController extends Controller
     {
         DB::table('questions')->where('id', $id)->update([
                     'judul' => $request->judul,
-                    'isi' => $request->isi
+                    'isi' => $request->isi,
+                    'updated_at' => $request->updated_at
                     ]);
-
         $questions = DB::table('questions')->where('id', $id)->get();
         $answers = DB::table('answers')->where('pertanyaan_id', $id)->get();
         return view('items.pertanyaan_show', compact('questions'), compact('answers'));
